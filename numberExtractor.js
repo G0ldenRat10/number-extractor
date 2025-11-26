@@ -1,6 +1,4 @@
 /**
- * Number Extractor - Clean browser version
- * Extract numbers from nested arrays and mixed data types
  * @version 1.0.0
  * @license MIT
  */
@@ -9,7 +7,6 @@
     'use strict';
     
     /**
-     * Extracts all numbers from nested arrays and mixed data types
      * @param {Array} array - Input array
      * @returns {Array} Flat array of numbers
      */
@@ -41,6 +38,7 @@
     /**
      * Utility functions for number operations
      */
+    
     const NumberUtils = {
         // Main extraction
         extract: extractNumbers,
@@ -114,15 +112,12 @@
 
     // Export based on environment
     if (typeof define === 'function' && define.amd) {
-        // AMD (RequireJS)
         define([], function() {
             return NumberExtractor;
         });
     } else if (typeof module === 'object' && module.exports) {
-        // CommonJS (Node.js)
         module.exports = NumberExtractor;
     } else {
-        // Browser global
         global.NumberExtractor = NumberExtractor;
     }
     
