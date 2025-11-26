@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Number Extractor Demo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-case {
+            margin: 15px 0;
+            padding: 15px;
+            border-left: 4px solid #007acc;
+            background: #f8f9fa;
+        }
+        .result {
+            font-weight: bold;
+            color: #28a745;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Number Extractor - Browser Demo</h1>
+    <p>Simple library to extract numbers from nested arrays</p>
+    <p>Basicaly this was all made just because of this dumb task I was on, and .flat() was forbidden. </p>
+    
+    <div id="output"></div>
+
+    <!-- Include the library -->
+    <script src="numberExtractor.js"></script>
+    
+    <script>
+        function runDemo() {
+            const output = document.getElementById('output');
+            let html = '';
+            
+            // Test 1: Basic functionality
+            const test1 = [1, [2, 3, '4'], 5, , [6, '7']];
+            const result1 = NumberExtractor.extractNumbers(test1);
+            
+            html += `
+                <div class="test-case">
+                    <h3>Basic Example</h3>
+                    <p><strong>Input:</strong> <code>${JSON.stringify(test1)}</code></p>
+                    <p><strong>Output:</strong> <code class="result">${JSON.stringify(result1)}</code></p>
+                </div>
+            `;
+            
+            // Test 2: Utility functions
+            const test2 = [1, [2, '3'], 4, '5', 6, 2];
+            
+            html += `
+                <div class="test-case">
+                    <h3>Utility Functions</h3>
+                    <p><strong>Input:</strong> <code>${JSON.stringify(test2)}</code></p>
+                    <p><strong>Sum:</strong> ${NumberExtractor.NumberUtils.sum(test2)}</p>
+                    <p><strong>Average:</strong> ${NumberExtractor.NumberUtils.average(test2).toFixed(2)}</p>
+                    <p><strong>Even Numbers:</strong> ${JSON.stringify(NumberExtractor.NumberUtils.onlyEven(test2))}</p>
+                    <p><strong>Unique Numbers:</strong> ${JSON.stringify(NumberExtractor.NumberUtils.unique(test2))}</p>
+                </div>
+            `;
+            
+            // Test 3: Mixed data types
+            const test3 = ['hello', 123, null, undefined, '', ['456', 'abc'], true, false];
+            const result3 = NumberExtractor.extract(test3);
+            
+            html += `
+                <div class="test-case">
+                    <h3>Mixed Data Types</h3>
+                    <p><strong>Input:</strong> <code>${JSON.stringify(test3)}</code></p>
+                    <p><strong>Output:</strong> <code class="result">${JSON.stringify(result3)}</code></p>
+                </div>
+            `;
+            
+            // Library info
+            html += `
+                <div class="test-case">
+                    <h3>Library Information</h3>
+                    <p><strong>Version:</strong> ${NumberExtractor.version}</p>
+                    <p><strong>Available Functions:</strong> extractNumbers, NumberUtils</p>
+                    <p><strong>Usage:</strong></p>
+                    <code>
+                        // Basic usage<br>
+                        const numbers = NumberExtractor.extractNumbers([1, [2, '3']]);<br><br>
+                        // Using utilities<br>
+                        const sum = NumberExtractor.NumberUtils.sum(data);<br>
+                        const even = NumberExtractor.utils.onlyEven(data);
+                    </code>
+                </div>
+            `;
+            
+            output.innerHTML = html;
+        }
+        
+        // Run demo when page loads
+        document.addEventListener('DOMContentLoaded', runDemo);
+    </script>
+</body>
+</html>
